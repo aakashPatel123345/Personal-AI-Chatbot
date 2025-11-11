@@ -1,6 +1,7 @@
 from langchain_community.document_loaders import TextLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_community.vectorstores import Chroma
 
 file_path = "./data/about_me.md"
 loader = TextLoader(file_path)
@@ -29,5 +30,24 @@ split_docs = text_splitter.split_documents(docs)
 print(f"\nSplit into {len(split_docs)} chunks.")
 print(f"\nExample chunk:\n{split_docs[0].page_content[:100]}")
 
+# Let's initialize an array to hold all the text from our documents
+texts = [doc.page_content for doc in split_docs]
+# Embed the text
+embeddings_list = embeddings.embed_documents(texts)
 
 
+# We can print out a few lines to show how the embeddings look like
+print(f"Created {len(embeddings_list)} embeddings.")
+print(f"Each embedding vector has length {len(embeddings_list[0])}.")
+
+# Now let's store this in our local chroma db
+persist_dir = "./chroma_db"
+vector_store = Chroma.from_documents(
+    split_docs,
+    embeddings, 
+    persist_directory = persist_dir
+)
+vector_store.persist()
+
+
+print("\n✅ ChromaDB successfully stored locally.")

@@ -66,19 +66,29 @@
 ## Projects
 
 ### Deep Learning Image Classifier
-- **Description**: [What the project does]
-- **Technologies Used**: [Tech stack]
+- **Description**: A hands-on dive into computer vision — I built a neural network from scratch in PyTorch that can identify images with 65% accuracy after training on 2,000 examples. It was a great crash course in convolutional layers, model tuning, and seeing deep learning come to life.
+- **Technologies Used**: Python, PyTorch
 - **Key Features**: 
-  - [Feature 1]
-  - [Feature 2]
+  - Developed an Image Classifier Neural Network utilizing PyTorch library, demonstrating proficiency in deep learning techniques and artificial intelligence principles.
+  - Trained the neural network on a dataset of 2000 images, employing a combination of convolutional, batch normalization, linear, max pooling, and dropout layers to optimize model performance.
+  - Achieved an overall 65% accuracy in correctly identifying images through a comprehensive training pipeline including data transformation, loss calculation, and model evaluation.
 - **Achievements**: [What you accomplished or learned]
 
 ### Stock Market Analysis App
-- **Description**: [What the project does]
-- **Technologies Used**: [Tech stack]
+- **Description**: Imagine combining live market data, financial news, and an AI-powered assistant — that’s what I built. A real-time stock dashboard that streams up-to-the-second data for 1,000+ tickers, while a custom chatbot powered by OpenAI helps users make sense of it all.
+- **Technologies Used**: Javascript, React, Node.js, MongoDB, OpenAI API
 - **Key Features**:
-  - [Feature 1]
-  - [Feature 2]
+  - Engineered a real-time stock tracking platform using Polygon.io API, achieving sub-second data updates for over 1,000+ ticker symbols with optimized request handling.
+  - Integrated NewsAPI to dynamically fetch and display the top 10 financial articles per user query, enhancing user experience by combining data with news context.
+  - Designed and deployed a custom LLM chatbot powered by the OpenAI API to provide stock insights, answer user questions, and analyze real-time data.
+
+### Nonprofit Organization Website
+- **Description**: I helped a nonprofit modernize their online presence by building a sleek, full-stack web platform that boosted engagement by 40%. It’s built with React and Node.js, but the real win was making it easy for non-technical users to manage content and grow their community.
+- **Technologies Used**: Javascript, React, Node.js
+- **Key Features**:
+  - Developed a full-stack web platform for a nonprofit organization with over 500 attendees, resulting in a 40% increase in traffic and outreach to sponsors.
+  - Implemented a MongoDB schema with Node.js and Express to store and retrieve dynamic content enabling non-technical users to easily update site content, and integrated front-end components using React enhancing development efficiency and consistency.
+  - Optimized for performance and mobile responsiveness across browsers and devices, contributing to a 30% increase in returning attendees over the following year.
 
 ## Education
 - **Degree**: Bachelors of Science in Computer Science
