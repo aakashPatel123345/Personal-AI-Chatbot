@@ -1,53 +1,63 @@
+import os
 from langchain_community.document_loaders import TextLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
 
-file_path = "./data/about_me.md"
-loader = TextLoader(file_path)
+# Load all .md files from the data folder
+data_dir = "./data"
+all_docs = []
 
+# Iterate through all .md files in the data directory
+print("Loading documents from data folder...")
+for filename in sorted(os.listdir(data_dir)):
+    if filename.endswith(".md"):
+        file_path = os.path.join(data_dir, filename)
+        try:
+            loader = TextLoader(file_path)
+            docs = loader.load()
+            all_docs.extend(docs)
+            print(f"✅ Loaded: {filename} ({len(docs)} document(s))")
+        except Exception as e:
+            print(f"❌ Error loading {filename}: {e}")
+
+if not all_docs:
+    print("⚠️  No documents found! Make sure you have .md files in the ./data folder.")
+    exit(1)
+
+print(f"\n📄 Total documents loaded: {len(all_docs)}")
+
+# Configure text splitter
 text_splitter = RecursiveCharacterTextSplitter(
-    chunk_size = 100,
-    chunk_overlap = 10
+    chunk_size=500,
+    chunk_overlap=100
 )
 
-embeddings = HuggingFaceEmbeddings (
+# Configure embeddings
+embeddings = HuggingFaceEmbeddings(
     model_name="BAAI/bge-small-en-v1.5",
     model_kwargs={'device': 'cpu'},
-    encode_kwargs={'normalize_embeddings': True} # Recommended for BGE
+    encode_kwargs={'normalize_embeddings': True}  # Recommended for BGE
 )
 
-# This represents the entire document
-docs = loader.load()
-print(f"Loaded {len(docs)} document chunks.")
-print(f"\nFirst 200 characters of the first chunk:\n{docs[0].page_content[:50]}")
-print(f"\nMetadata of the first chunk:\n{docs[0].metadata}")
-print(f"\nLength of page content is {len(docs[0].page_content)}")
+# Split documents into chunks
+print("\n📝 Splitting documents into chunks...")
+split_docs = text_splitter.split_documents(all_docs)
+print(f"✅ Split into {len(split_docs)} chunks.")
+print(f"\n📋 Example chunk (first 150 chars):\n{split_docs[0].page_content[:150]}...")
 
-
-# This is a bunch of document objects split from individual documents based on the chunk size we defined above.
-split_docs = text_splitter.split_documents(docs)
-print(f"\nSplit into {len(split_docs)} chunks.")
-print(f"\nExample chunk:\n{split_docs[0].page_content[:100]}")
-
-# Let's initialize an array to hold all the text from our documents
-texts = [doc.page_content for doc in split_docs]
-# Embed the text
-embeddings_list = embeddings.embed_documents(texts)
-
-
-# We can print out a few lines to show how the embeddings look like
-print(f"Created {len(embeddings_list)} embeddings.")
-print(f"Each embedding vector has length {len(embeddings_list[0])}.")
-
-# Now let's store this in our local chroma db
+# Create embeddings and store in ChromaDB
+print("\n🔢 Creating embeddings...")
 persist_dir = "./chroma_db"
+
+# If ChromaDB already exists, we'll overwrite it with new data
 vector_store = Chroma.from_documents(
     split_docs,
-    embeddings, 
-    persist_directory = persist_dir
+    embeddings,
+    persist_directory=persist_dir
 )
+
+# Persist the vector store
 vector_store.persist()
-
-
-print("\n✅ ChromaDB successfully stored locally.")
+print(f"\n✅ ChromaDB successfully stored locally at: {persist_dir}")
+print(f"📊 Total chunks stored: {len(split_docs)}")

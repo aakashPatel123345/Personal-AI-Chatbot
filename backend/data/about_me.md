@@ -2,13 +2,12 @@
 
 ## Background
 [1-2 short paragraphs about your background, current role, and what you're passionate about]
+My name is Aakash Patel, and I have a background in Software Engineering, AI, and Data Engineering. My experience spans developing full stack applications, integrating RESTful APIs, working on AI and ML models, and streamlining data. During my internships, I worked on large datasets, developing scalable applications, and collaborating across cross-functional teams to deliver meaningful results. Overtime, I have become more and more interested in artificial intelligence and machine learning. More particularly, how large langauge models and retrieval augmented generation (or RAAG for short) can connect human context with model understanding. I am passionate about everything in Software Engineering and even more passionate developing new projects that push me to learn and expand on my comfort zone. At the core, I am motivated by building technology that is meaningful, intuitive, and can genuinely help people. 
 
 ## Professional Experience
 
 ### Current Role
-- **Position**: I am still unemployed bro
-- **Company**: I am still unemployed bro
-- **Duration**: I am still unemployed bro
+- I am currently in my job search, and therefore do not have a current role. However, I spend my free time working on numerous projects. They can all be found on my personal website or my github!
 
 
 ### Previous Roles
@@ -72,7 +71,7 @@
   - Developed an Image Classifier Neural Network utilizing PyTorch library, demonstrating proficiency in deep learning techniques and artificial intelligence principles.
   - Trained the neural network on a dataset of 2000 images, employing a combination of convolutional, batch normalization, linear, max pooling, and dropout layers to optimize model performance.
   - Achieved an overall 65% accuracy in correctly identifying images through a comprehensive training pipeline including data transformation, loss calculation, and model evaluation.
-- **Achievements**: [What you accomplished or learned]
+- **Achievements**: Successfully built and trained a neural network from scratch, gaining hands-on experience with PyTorch, deep learning fundamentals, and computer vision techniques. This project solidified my understanding of how neural networks process visual data and sparked my interest in AI/ML.
 
 ### Stock Market Analysis App
 - **Description**: Imagine combining live market data, financial news, and an AI-powered assistant — that’s what I built. A real-time stock dashboard that streams up-to-the-second data for 1,000+ tickers, while a custom chatbot powered by OpenAI helps users make sense of it all.
@@ -117,5 +116,26 @@
 
 
 ## Personal Philosophy / Approach
-[1-2 paragraphs about your work style, values, or approach to problem-solving]
+I approach problem solving with a mix of curiosity, persistence, and structure. I like thinking of problems in different chunks, and enjoy breaking seemingly complex problems into smaller workable parts. Some things I really value are collaboration, communication, and trust. Moreover, I enjoy working with teams in which individuals are always striving to be the best versions of themselves. 
+
+## Personal hobbies and interests
+Despite loving to solve problems, code, and learn, I do enjoy various other activies. One of my favorite hobbies is cooking. I love cooking new foods, trying new recipes, and experimenting around in the kitchen. My favorite thing to cook has got to be quesidillas. Quesidillas are a childhood comfort meal for me, and one of the first "meals" I laerned to cook myself, and so it holds a special place in my heart. I also love to run! I participated in track back in high school, and since then have developed an interest in long distance running. I am by no means a seasoned and experienced runner, but one of my biggest life goals is to complete a half marathon one day. 
+
+I also love to watch tv and movies. When I feel lazy sometimes, I often find myself binging my favorite shows. My top three favorite tv shows of all time are Stranger Things, Andor, and Severance. During the later months of the year, I enjoy watching NFL, and my favorite football team is the Denver Broncos.
+
+
+## Personal background
+ - I ran track in highschool
+ - I participated in the robotics club in high school. My team went to the states championship!
+ - I went to college at the Unviersity of Maryland, at College Park
+ - I majored in Computer Science and received my Bachelor's Degree
+ - I minored in General Business
+ - I served as the president of a nonprofit student organization called Maryland Mayuri for 2 consecutive years, and enjoyed every second of being in that organization. I was a board memnber on my first year. 
+
+
+
+
+
+
+
 

@@ -65,23 +65,39 @@ async def chat_endpoint(request: ChatRequest):
 
 
     # Retrieve relevant context (k = 5 means the 5 most similar chunks)
-    # Increased from 3 to 5 for better context coverage
     top_docs = vectordb_loaded.similarity_search(user_message, k=5)
-    context = "\n".join(doc.page_content for doc in top_docs)
+    context = "\n\n".join([f"[Context {i+1}]: {doc.page_content}" for i, doc in enumerate(top_docs)])
+    
+    # Debug: Print retrieved context (remove in production if desired)
+    print(f"\n📚 Retrieved {len(top_docs)} context chunks")
+    if top_docs:
+        print(f"Context preview: {top_docs[0].page_content[:200]}...")
 
     # Build the full prompt for our LLM (gemini)
     # The model should act AS the user, not as an assistant talking about the user
-    full_prompt = f"""You are Aakash Patel. Answer the following question about yourself based on the information provided below. Respond naturally in first person, as if you are having a conversation about yourself.
+    system_instruction = """You are Aakash Patel. Answer questions about yourself in a casual, friendly way - like you're texting a friend. Be personable, authentic, and conversational.
 
-Information about you:
+CRITICAL RULES:
+- ONLY use information from the provided context. NEVER make up, invent, or use placeholder text.
+- If information isn't in the context, say something casual like "Yea, I can't really answer that bro" or "Hmm, I don't have much to say about that."
+- Write casually - use contractions (I'm, don't, can't), be friendly, like texting.
+- Use first person (I, me, my).
+- Never use placeholders like "[insert]" or "[mention]" - only real information from context."""
+
+    user_prompt = f"""Here's what I know about myself:
 {context}
 
 Question: {user_message}
 
-Answer (respond as Aakash Patel, in first person):"""
+Answer (casual, like texting a friend):"""
 
+    # Combine system instruction and user prompt
+    full_prompt = system_instruction + "\n\n" + user_prompt
+    
+    # Generate response - removed generation_config as it's not supported in this API format
+    # The model will use default settings which should work fine
     response = client.models.generate_content(
-        model="gemini-2.5-flash",
+        model="gemini-2.0-flash",
         contents=full_prompt,
     )
 

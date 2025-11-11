@@ -8,3 +8,4 @@ __pycache__/
 .env.production.local
 chroma_db/
 instructions.md
+data/
