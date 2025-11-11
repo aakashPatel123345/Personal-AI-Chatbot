@@ -1,9 +1,18 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import './App.css'
 
 function App() {
   const [message, setMessage] = useState("")
   const [chatHistory, setChatHistory] = useState([])
+  const textareaRef = useRef(null)
+
+  // Auto-resize textarea
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto'
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`
+    }
+  }, [message])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -47,27 +56,42 @@ function App() {
 
   return (
     <div className="main_container">
-      
       <div className="messages_container">
         {chatHistory.map((msg, index) => (
           <div key={index} className={`message ${msg.role}`}>
-            <p>{msg.content}</p>
+            <div className="message_content">
+              <div className="message_avatar">
+                {msg.role === 'user' ? 'U' : 'A'}
+              </div>
+              <div className="message_text">
+                <p>{msg.content}</p>
+              </div>
+            </div>
           </div>
         ))}
       </div>
 
       {/* Input Form */}
       <form onSubmit={handleSubmit} className="input_form">
-        <input
-          className='input_chat'
-          placeholder='Type a message'
-          type="text"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        />
-        <button type="submit" className="submit_button">
-          Send
-        </button>
+        <div className="input_wrapper">
+          <textarea
+            ref={textareaRef}
+            className='input_chat'
+            placeholder='Message...'
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                handleSubmit(e);
+              }
+            }}
+            rows={1}
+          />
+          <button type="submit" className="submit_button" disabled={!message.trim()}>
+            Send
+          </button>
+        </div>
       </form>
     </div>
   )
