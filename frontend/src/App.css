@@ -10,7 +10,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #ffffff;
+  background: #0a0a0a;
   min-height: 100vh;
 }
 
@@ -26,9 +26,22 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background: #ffffff;
+  background: #0a0a0a;
   max-width: 100%;
   margin: 0 auto;
+  position: relative;
+}
+
+/* Subtle gradient overlay */
+.main_container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 300px;
+  background: radial-gradient(ellipse at top, rgba(120, 119, 198, 0.05), transparent);
+  pointer-events: none;
 }
 
 .messages_container {
@@ -37,11 +50,11 @@ body {
   padding: 0;
   display: flex;
   flex-direction: column;
-  background: #ffffff;
+  background: transparent;
 }
 
 .messages_container::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 .messages_container::-webkit-scrollbar-track {
@@ -49,35 +62,36 @@ body {
 }
 
 .messages_container::-webkit-scrollbar-thumb {
-  background: #d1d5db;
-  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
 }
 
 .messages_container::-webkit-scrollbar-thumb:hover {
-  background: #9ca3af;
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .message {
   display: flex;
-  padding: 1.5rem;
-  animation: fadeIn 0.2s ease-in;
-  border-bottom: 1px solid #f3f4f6;
+  padding: 2rem 1.5rem;
+  animation: fadeIn 0.3s ease-in;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
 }
 
 .message.user {
-  background: #ffffff;
+  background: transparent;
 }
 
 .message.assistant {
-  background: #f9fafb;
+  background: rgba(255, 255, 255, 0.01);
 }
 
 .message_content {
-  max-width: 768px;
+  max-width: 720px;
   width: 100%;
   margin: 0 auto;
   display: flex;
-  gap: 1rem;
+  gap: 1.25rem;
+  align-items: flex-start;
 }
 
 .message.user .message_content {
@@ -85,34 +99,39 @@ body {
 }
 
 .message_avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 4px;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 600;
-  font-size: 0.875rem;
+  font-weight: 500;
+  font-size: 0.8125rem;
+  letter-spacing: 0.5px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .message.user .message_avatar {
-  background: #3b82f6;
-  color: white;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(59, 130, 246, 0.15));
+  color: #a5b4fc;
+  backdrop-filter: blur(10px);
 }
 
 .message.assistant .message_avatar {
-  background: #6b7280;
-  color: white;
+  background: rgba(255, 255, 255, 0.03);
+  color: #9ca3af;
+  backdrop-filter: blur(10px);
 }
 
 .message_text {
   flex: 1;
-  line-height: 1.75;
-  color: #1f2937;
+  line-height: 1.7;
+  color: #e5e7eb;
   font-size: 0.9375rem;
   word-wrap: break-word;
   white-space: pre-wrap;
+  padding-top: 0.25rem;
 }
 
 .message_text p {
@@ -122,9 +141,11 @@ body {
 @keyframes fadeIn {
   from {
     opacity: 0;
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -132,13 +153,14 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
-  background: #ffffff;
-  border-top: 1px solid #e5e7eb;
+  padding: 1.5rem;
+  background: rgba(10, 10, 10, 0.8);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
 }
 
 .input_wrapper {
-  max-width: 768px;
+  max-width: 720px;
   width: 100%;
   display: flex;
   gap: 0.75rem;
@@ -147,82 +169,92 @@ body {
 
 .input_chat {
   flex: 1;
-  padding: 0.75rem 1rem;
-  border: 1px solid #d1d5db;
+  padding: 0.875rem 1.125rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   font-size: 0.9375rem;
   outline: none;
-  transition: border-color 0.2s;
+  transition: all 0.2s ease;
   font-family: inherit;
-  background: #ffffff;
-  color: #1f2937;
+  background: rgba(255, 255, 255, 0.03);
+  color: #e5e7eb;
   resize: none;
-  min-height: 44px;
+  min-height: 48px;
   max-height: 200px;
   line-height: 1.5;
+  backdrop-filter: blur(10px);
 }
 
 .input_chat:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  border-color: rgba(139, 92, 246, 0.4);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.08);
 }
 
 .input_chat::placeholder {
-  color: #9ca3af;
+  color: #6b7280;
 }
 
 .submit_button {
-  padding: 0.75rem 1.25rem;
-  background: #1f2937;
-  color: white;
-  border: none;
+  padding: 0.875rem 1.5rem;
+  background: rgba(255, 255, 255, 0.06);
+  color: #e5e7eb;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   font-size: 0.9375rem;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s ease;
   white-space: nowrap;
   flex-shrink: 0;
-  height: 44px;
+  height: 48px;
+  backdrop-filter: blur(10px);
 }
 
 .submit_button:hover {
-  background: #111827;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
 }
 
 .submit_button:active {
-  background: #030712;
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(0);
 }
 
 .submit_button:disabled {
-  opacity: 0.5;
+  opacity: 0.3;
   cursor: not-allowed;
+  transform: none;
 }
 
 /* Empty state */
 .messages_container:empty::after {
-  content: "Start a conversation...";
+  content: "Begin conversation";
   display: block;
-  color: #9ca3af;
+  color: rgba(255, 255, 255, 0.15);
   text-align: center;
   margin: auto;
   padding: 2rem;
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 500;
 }
 
 /* Responsive design */
 @media (max-width: 768px) {
   .message {
-    padding: 1rem;
+    padding: 1.5rem 1rem;
   }
 
   .message_content {
-    gap: 0.75rem;
+    gap: 1rem;
   }
 
   .message_avatar {
-    width: 28px;
-    height: 28px;
+    width: 32px;
+    height: 32px;
     font-size: 0.75rem;
   }
 
@@ -231,22 +263,22 @@ body {
   }
 
   .input_form {
-    padding: 0.75rem;
+    padding: 1rem;
   }
 
   .input_wrapper {
-    gap: 0.5rem;
+    gap: 0.625rem;
   }
 
   .input_chat {
     font-size: 0.875rem;
-    padding: 0.625rem 0.875rem;
-    min-height: 40px;
+    padding: 0.75rem 1rem;
+    min-height: 44px;
   }
 
   .submit_button {
-    padding: 0.625rem 1rem;
+    padding: 0.75rem 1.25rem;
     font-size: 0.875rem;
-    height: 40px;
+    height: 44px;
   }
 }

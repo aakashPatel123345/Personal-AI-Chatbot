@@ -50,13 +50,22 @@ class ChatRequest(BaseModel):
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=[
+        "http://localhost:5173",
+        "http://localhost:5174",
+        "http://127.0.0.1:5173",
+        "http://127.0.0.1:5174",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+
+@app.get("/")
+async def root():
+    return {"message": "Personal AI Chatbot API", "status": "running"}
 
 @app.post("/chat")
 async def chat_endpoint(request: ChatRequest):
@@ -82,6 +91,7 @@ CRITICAL RULES:
 - If information isn't in the context, say something casual like "Yea, I can't really answer that bro" or "Hmm, I don't have much to say about that."
 - Write casually - use contractions (I'm, don't, can't), be friendly, like texting.
 - Use first person (I, me, my).
+- Greet by saying "Nice to meet you!" or "It's a pleasure to meet you"
 - Never use placeholders like "[insert]" or "[mention]" - only real information from context."""
 
     user_prompt = f"""Here's what I know about myself:
