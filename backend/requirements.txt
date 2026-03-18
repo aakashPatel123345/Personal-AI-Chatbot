@@ -90,7 +90,7 @@ multidict==6.7.0
 mypy_extensions==1.1.0
 nest-asyncio==1.6.0
 networkx==3.5
-nltk==3.9.2
+nltk==3.9.3
 numpy==2.3.4
 oauthlib==3.3.1
 olefile==0.47
